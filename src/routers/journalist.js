@@ -106,7 +106,7 @@ router.post('/login',async(req,res)=>{
     try{
         const journalist = await Journalist.findByCredentials(req.body.email,req.boy.password)
         const token = await journalist.generateToken()
-        res.status(200).send({journalist.token})
+        res.status(200).send({journalist,token})
     }
     catch(e){
         res.status(500).send('Error: ',e)
