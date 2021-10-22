@@ -5,6 +5,7 @@ const Journalist = require('../models/journalist')
 const auth = require('../middelware/auth')
 
 // for avatar image upload
+const multer = require('multer')
 const upload = multer({
     limits:{
         fieldSize: 100000
