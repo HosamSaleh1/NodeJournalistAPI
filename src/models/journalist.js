@@ -94,6 +94,15 @@ journalistSchema.virtual('news',{
     localField:'_id',
     foreignField:'owner'
 })
+// to Object function
+journalistSchema.methods.toJSON = function(){
+    const journalist = this
+    const journalistObject = journalist.toObject()
+    delete journalistObject.password
+    delete journalistObject.tokens
+
+    return journalistObject
+}
 
 // Journalist Model
 const Journalist = mongoose.model('Journalist',journalistSchema)
