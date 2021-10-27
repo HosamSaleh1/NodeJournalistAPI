@@ -59,11 +59,11 @@ router.post('/addJournalist',async (req,res)=>{
     try{
         const journalist = new Journalist(req.body)
         await journalist.save()
-        await journalist.generateToken()
-        res.status(200).send({journalist})
+        const token = await journalist.generateToken()
+        res.status(200).send({journalist,token})
     }
     catch(e){
-        res.status(400).send('Error: ',e)
+        res.status(400).send(e)
     }
 })
 
@@ -105,12 +105,15 @@ router.delete('/deleteJournalist/:id',auth,async(req,res)=>{
 // login 
 router.post('/login',async(req,res)=>{
     try{
-        const journalist = await Journalist.findByCredentials(req.body.email,req.boy.password)
-        const token = await journalist.generateToken()
+        console.log(req)
+        let journalist = await Journalist.findByCredentials(req.body.email,req.body.password)
+        let token = await journalist.generateToken()
         res.status(200).send({journalist,token})
+        console.log('success')
     }
     catch(e){
-        res.status(500).send('Error: ',e)
+        console.log('Error')
+        res.status(500).send(e)
     }
 })
 
