@@ -50,7 +50,7 @@ router.get('/allJournalists/:id',auth,(req,res)=>{
         }
         res.status(200).send(journalist)
     }).catch((e)=>{
-        res.status(500).send('Error: ',e)
+        res.status(500).send(e)
     })
 })
 
@@ -98,7 +98,7 @@ router.delete('/deleteJournalist/:id',auth,async(req,res)=>{
         res.status(200).send(journalist)
     }
     catch(e){
-        res.status(400).send('Error: ',e)
+        res.status(400).send(e)
     }
 })
 
@@ -109,10 +109,8 @@ router.post('/login',async(req,res)=>{
         let journalist = await Journalist.findByCredentials(req.body.email,req.body.password)
         let token = await journalist.generateToken()
         res.status(200).send({journalist,token})
-        console.log('success')
     }
     catch(e){
-        console.log('Error')
         res.status(500).send(e)
     }
 })

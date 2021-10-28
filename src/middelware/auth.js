@@ -6,8 +6,10 @@ const auth = async (req,res,next)=>{
         const token = req.header('Authorization').replace('Bearer ','')
 
         const decode = jwt.verify(token,'NodeJournalistAPI')
+        console.log(decode)
 
-        const journalist = await Journalist.findOne({_id:decode._id,'tokens.token':token})
+        const journalist = await Journalist.findOne({_id:decode._is,'tokens.token':token})
+        console.log(journalist)
         if(!journalist){
             throw new Error()
         }

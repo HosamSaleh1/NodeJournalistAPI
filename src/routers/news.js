@@ -33,7 +33,7 @@ router.get('/allNews/:id',auth,(req,res)=>{
 })
 
 // post news
-router.post('addNews',auth,(req,res)=>{
+router.post('/addNews',auth,(req,res)=>{
     const news = new News({
         ...req.body,
         owner:req.journalist._id
@@ -42,7 +42,7 @@ router.post('addNews',auth,(req,res)=>{
     .then(()=>{
         res.status(200).send(news)
     }).catch((e)=>{
-        res.status(400).send('Error: ', e)
+        res.status(400).send('err' + e)
     })
 })
 
